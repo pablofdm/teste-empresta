@@ -2166,6 +2166,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2177,54 +2183,62 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      url: 'http://127.0.0.1:8000/api/instituicao'
+      url: "http://127.0.0.1:8000/api/instituicao"
     }).then(function (response) {
-      _this.$store.commit('setInstitutionName', response.data);
+      _this.$store.commit("setInstitutionName", response.data);
     });
     axios__WEBPACK_IMPORTED_MODULE_2___default()({
-      url: 'http://127.0.0.1:8000/api/convenio'
+      url: "http://127.0.0.1:8000/api/convenio"
     }).then(function (response) {
-      _this.$store.commit('setInsuranceOrg', response.data);
+      _this.$store.commit("setInsuranceOrg", response.data);
     });
   },
   created: {},
   data: function data() {
     return {
-      price: 0.00,
+      price: 0.0,
       money: {
         decimal: ",",
         thousands: ".",
         prefix: "R$",
         suffix: "",
         precision: 2
-      }
+      },
+      key: "",
+      index: ""
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(['loanValue', 'institution', 'insurance', 'parcels', 'key', 'index'])),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(['setLoanValue', 'setInstitutionName', 'setInsuranceOrg', 'setParcels', 'handleIndexValue', 'handleKeyValue'])), {}, {
-    // this.$store.commit
-    // catchingValues: function(){
-    //   let value = document.getElementById('loanValue').value
-    //   console.log(value)
-    //   let inst = document.getElementById('institutionName').value
-    //   let insurance = document.getElementById('insuranceOrg').value
-    //   let parcels = document.getElementById('parcelsNumber').value
-    //   this.$store.commit('setLoanValue', value)
-    //   this.$store.commit('setInstitutionName', inst)
-    //   this.$store.commit('setInsuranceOrg', insurance)
-    //   this.$store.commit('setParcels', parcels)
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["loanValue", "institution", "insurance", "parcels"])),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setLoanValue", "setInstitutionName", "setInsuranceOrg", "setParcels"])), {}, {
+    // findIndex(){
+    //   let p = this.$store.state.institution;
+    // let institution = document.getElementById("institutionName").value;
+    //   var index = p.map((o) => o.attr1).indexOf(institution);
+    //   console.log(index);
+    //   // let insurance = document.getElementById("insuranceOrg").value;
+    //   // if(Object.key(this.$store.state.institution) = institution){
+    //   //     this.key =
+    //   // }
     // },
-    handleKey: function handleKey(key) {
-      console.log(key);
-      this.$store.commit('handleKeyValue', key);
-    },
-    handleIndex: function handleIndex(index) {
-      console.log(index);
-      this.$store.commit('handleIndex', index);
-    },
     sendProposal: function sendProposal() {
-      var value = document.getElementById('loanValue').value;
-      var clean = value.replace(/[^0-9,]*/g, '').replace(',', '.');
+      var _this2 = this;
+
+      var value = document.getElementById("loanValue").value;
+      var clean = value.replace(/[^0-9,]*/g, "").replace(",", ".");
+      var p = this.$store.state.institution;
+      var i = this.$store.state.insurance;
+      var institution = document.getElementById("institutionName").value;
+      p.map(function (element, index) {
+        if (element.chave == institution) {
+          _this2.key = index;
+        }
+      });
+      var insurance = document.getElementById("insuranceOrg").value;
+      i.map(function (element, index) {
+        if (element.chave == insurance) {
+          _this2.index = index;
+        }
+      });
       axios__WEBPACK_IMPORTED_MODULE_2___default()({
         url: "http://127.0.0.1:8000/api/simular",
         method: "POST",
@@ -2232,13 +2246,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cache: false,
         data: {
           valor_emprestimo: clean,
-          instituicoes: this.$store.state.institution[this.$store.state.key],
-          convenios: this.$store.state.insurance[this.$store.state.index],
-          parcels: document.getElementById('parcelsNumber').value
+          instituicoes: this.$store.state.institution[this.key],
+          convenios: this.$store.state.insurance[this.index],
+          parcels: document.getElementById("parcelsNumber").value
         }
-      }).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
+      }).then(function (response) {})["catch"](function (error) {
         console.log(error);
       });
     }
@@ -39070,15 +39082,15 @@ var render = function() {
                                   attrs: { for: "institution" },
                                   on: {
                                     change: function($event) {
-                                      return _vm.handleKey(index)
+                                      this.$root.key = index
                                     }
                                   }
                                 },
                                 [
                                   _vm._v(
-                                    "\n                    " +
+                                    "\n                      " +
                                       _vm._s(institution.chave) +
-                                      "\n                  "
+                                      "\n                    "
                                   )
                                 ]
                               )
@@ -39137,7 +39149,7 @@ var render = function() {
                                   attrs: { for: "insuranceOpt" },
                                   on: {
                                     change: function($event) {
-                                      return _vm.handleIndex(index)
+                                      this.$root.index = index
                                     }
                                   }
                                 },
@@ -39145,7 +39157,7 @@ var render = function() {
                                   _vm._v(
                                     "\n                      " +
                                       _vm._s(insurance.chave) +
-                                      "\n                     "
+                                      "\n                    "
                                   )
                                 ]
                               )
@@ -53207,9 +53219,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     loanValue: '',
     institution: [],
     insurance: [],
-    parcels: '',
-    index: '',
-    key: ''
+    parcels: ''
   },
   mutations: {
     setLoanValue: function setLoanValue(state, payload) {
@@ -53223,31 +53233,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     setParcels: function setParcels(state, payload) {
       state.parcels = payload;
-    },
-    handleIndexValue: function handleIndexValue(state) {
-      state.index = state;
-    },
-    handleKeyValue: function handleKeyValue(state) {
-      state.key = state;
-    } // setIndex: state => {
-    //     state.chave = state;
-    // },
-    // setIndexArray: () => {
-    //     this.$store.commit('setIndex', state.chave)
-    // }
-    // buscarCidades: (state, event) => {
-    //     let estado = event.target != undefined ? event.target.value : event;
-    //     fetch(`/useful/citys?state=${estado}`)
-    //     .then(response => {
-    //         response.json().then((data) => {
-    //           state.cidades = data;
-    //             });
-    //             })
-    //             .catch((err) => {
-    //             console.log(err);
-    //             });
-    //         },
-
+    }
   }
 }));
 
@@ -53260,8 +53246,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\pfern\Desktop\Projetos com React e Vuejs\teste-empresta\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\pfern\Desktop\Projetos com React e Vuejs\teste-empresta\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\pduarte\Desktop\teste-empresta\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\pduarte\Desktop\teste-empresta\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -9,8 +9,7 @@ export default new Vuex.Store({
         institution: [],
         insurance: [],
         parcels: '',
-        index: '',
-        key: ''
+
     },
 
     mutations: {
@@ -27,38 +26,5 @@ export default new Vuex.Store({
         setParcels: (state, payload) => {
             state.parcels = payload;
         },
-
-
-        handleIndexValue: state => {
-            state.index = state;
-           
-          },
-          
-        handleKeyValue: state =>{
-        state.key= state;
-        },
-        
-        // setIndex: state => {
-        //     state.chave = state;
-        // },
-
-        // setIndexArray: () => {
-        //     this.$store.commit('setIndex', state.chave)
-        // }
-
-        // buscarCidades: (state, event) => {
-        //     let estado = event.target != undefined ? event.target.value : event;
-        //     fetch(`/useful/citys?state=${estado}`)
-        //     .then(response => {
-        //         response.json().then((data) => {
-        //           state.cidades = data;
-        //             });
-        //             })
-        //             .catch((err) => {
-        //             console.log(err);
-        //             });
-        //         },
-
-}
-
+    }
 })

@@ -36,10 +36,15 @@
                       aria-invalid="false"
                       required="true"
                     >
-                    <option value="" disabled selected ></option>
-                    <option for="institution" @change="handleKey(index)" v-for="institution, index in $store.state.institution" v-bind:key="institution.chave">
-                      {{ institution.chave }}
-                    </option>
+                      <option value="" disabled selected></option>
+                      <option
+                        for="institution"
+                        @change="this.$root.key = index"
+                        v-for="(institution, index) in $store.state.institution"
+                        v-bind:key="institution.chave"
+                      >
+                        {{ institution.chave }}
+                      </option>
                     </select>
                   </span>
                 </div>
@@ -55,13 +60,16 @@
                       aria-invalid="false"
                       required="true"
                     >
-                    <option value="" disabled selected hidden></option>
-                    <option for="insuranceOpt" @change="handleIndex(index)" v-for="insurance, index in $store.state.insurance" :key="insurance.chave">
+                      <option value="" disabled selected hidden></option>
+                      <option
+                        for="insuranceOpt"
+                        @change="this.$root.index = index"
+                        v-for="(insurance, index) in $store.state.insurance"
+                        :key="insurance.chave"
+                      >
                         {{ insurance.chave }}
-                       </option>
+                      </option>
                     </select>
-                
-                       
                   </span>
                 </div>
                 <div class="col-6 col-sm-6 col-lg-6 col-md-6 col-xl-6">
@@ -73,16 +81,15 @@
                       value=""
                       class="form-control"
                       aria-invalid="false"
-                     
                     >
-                     <option value="" disabled selected hidden></option>
-                     <option value="36">36</option>
-                     <option value="48">48</option>
-                     <option value="60">60</option>
-                     <option value="72">72</option>
-                     <option value="84">84</option>
+                      <option value="" disabled selected hidden></option>
+                      <option value="36">36</option>
+                      <option value="48">48</option>
+                      <option value="60">60</option>
+                      <option value="72">72</option>
+                      <option value="84">84</option>
                     </select>
-                    </span>
+                  </span>
                 </div>
               </div>
               <div
@@ -106,7 +113,6 @@
 
 
 <style scoped>
-
 .bg-empresta {
   background-color: #ef6c00;
 }
@@ -173,37 +179,29 @@
 </style>
 <script>
 import { VMoney } from "v-money";
-import {mapMutations, mapState} from "vuex"
-import axios from "axios"
+import { mapMutations, mapState } from "vuex";
+import axios from "axios";
 
 export default {
   directives: { money: VMoney },
   mounted() {
+    axios({
+      url: "http://127.0.0.1:8000/api/instituicao",
+    }).then((response) => {
+      this.$store.commit("setInstitutionName", response.data);
+    });
 
     axios({
-    url: 'http://127.0.0.1:8000/api/instituicao',
-    })
-    .then(response => {
-      this.$store.commit('setInstitutionName', response.data)
-    })
-  
-  
-    axios({
-    url: 'http://127.0.0.1:8000/api/convenio'
-    })
-    .then(response => {
-      this.$store.commit('setInsuranceOrg', response.data)
-    })
-  
-},
-  created: {
-
-
+      url: "http://127.0.0.1:8000/api/convenio",
+    }).then((response) => {
+      this.$store.commit("setInsuranceOrg", response.data);
+    });
   },
+  created: {},
 
   data() {
     return {
-      price: 0.00,
+      price: 0.0,
       money: {
         decimal: ",",
         thousands: ".",
@@ -211,77 +209,75 @@ export default {
         suffix: "",
         precision: 2,
       },
+      key: "",
+      index: "",
     };
   },
 
-  computed:{
-      ...mapState([
-        'loanValue',
-        'institution',
-        'insurance',
-        'parcels',
-        'key',
-        'index'
-          ])
+  computed: {
+    ...mapState(["loanValue", "institution", "insurance", "parcels"]),
   },
 
-   methods: {
+  methods: {
+    // FUNÇÕES DO STORE STATE
+    ...mapMutations([
+      "setLoanValue",
+      "setInstitutionName",
+      "setInsuranceOrg",
+      "setParcels",
+    ]),
 
-        // FUNÇÕES DO STORE STATE
-        ...mapMutations([
-            'setLoanValue',
-            'setInstitutionName',
-            'setInsuranceOrg',
-            'setParcels',
-            'handleIndexValue',
-            'handleKeyValue'
-        ]),
-// this.$store.commit
-    // catchingValues: function(){
-    //   let value = document.getElementById('loanValue').value
-    //   console.log(value)
-    //   let inst = document.getElementById('institutionName').value
-    //   let insurance = document.getElementById('insuranceOrg').value
-    //   let parcels = document.getElementById('parcelsNumber').value
-      
-    //   this.$store.commit('setLoanValue', value)
-    //   this.$store.commit('setInstitutionName', inst)
-    //   this.$store.commit('setInsuranceOrg', insurance)
-    //   this.$store.commit('setParcels', parcels)
+    // findIndex(){
+    //   let p = this.$store.state.institution;
+    // let institution = document.getElementById("institutionName").value;
+    //   var index = p.map((o) => o.attr1).indexOf(institution);
+
+    //   console.log(index);
+
+    //   // let insurance = document.getElementById("insuranceOrg").value;
+    //   // if(Object.key(this.$store.state.institution) = institution){
+    //   //     this.key =
+    //   // }
     // },
 
-  handleKey: function(key){
-    console.log(key)
-    this.$store.commit('handleKeyValue', key)
-  },
-    handleIndex: function(index){
-      console.log(index)
-    this.$store.commit('handleIndex', index)
-  },
-
     sendProposal: function () {
-        let value = document.getElementById('loanValue').value
-        let clean = value.replace(/[^0-9,]*/g, '').replace(',', '.');
-            axios({
-                url: "http://127.0.0.1:8000/api/simular",
-                method: "POST",
-                responseType: "JSON",
-                cache: false,
-                data: {
-                    valor_emprestimo: clean,
-                    instituicoes: this.$store.state.institution[this.$store.state.key],
-                    convenios: this.$store.state.insurance[this.$store.state.index],
-                    parcels: document.getElementById('parcelsNumber').value
-                },
-            })
-                .then((response) => {
-                    console.log(response)
-                })
-                .catch((error) => {
-                  console.log(error)
-                });
-        },
+      let value = document.getElementById("loanValue").value;
+      let clean = value.replace(/[^0-9,]*/g, "").replace(",", ".");
+      let p = this.$store.state.institution;
+      let i = this.$store.state.insurance;
+      let institution = document.getElementById("institutionName").value;
+      p.map((element, index) => {
+        if (element.chave == institution) {
+          this.key = index;
+        }
+      });
 
-   }
+      let insurance = document.getElementById("insuranceOrg").value;
+      i.map((element, index) => {
+        if (element.chave == insurance) {
+          this.index = index;
+        }
+      });
+
+      axios({
+        url: "http://127.0.0.1:8000/api/simular",
+        method: "POST",
+        responseType: "JSON",
+        cache: false,
+        data: {
+          valor_emprestimo: clean,
+          instituicoes: this.$store.state.institution[this.key],
+          convenios: this.$store.state.insurance[this.index],
+          parcels: document.getElementById("parcelsNumber").value,
+        },
+      })
+        .then((response) => {
+          
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>
