@@ -2210,16 +2210,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["loanValue", "institution", "insurance", "parcels"])),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setLoanValue", "setInstitutionName", "setInsuranceOrg", "setParcels"])), {}, {
-    // findIndex(){
-    //   let p = this.$store.state.institution;
-    // let institution = document.getElementById("institutionName").value;
-    //   var index = p.map((o) => o.attr1).indexOf(institution);
-    //   console.log(index);
-    //   // let insurance = document.getElementById("insuranceOrg").value;
-    //   // if(Object.key(this.$store.state.institution) = institution){
-    //   //     this.key =
-    //   // }
-    // },
     sendProposal: function sendProposal() {
       var _this2 = this;
 
