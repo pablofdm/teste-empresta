@@ -2172,6 +2172,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2217,13 +2219,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var clean = value.replace(/[^0-9,]*/g, "").replace(",", ".");
       var p = this.$store.state.institution;
       var i = this.$store.state.insurance;
+      var r = this.$store.state.result;
+      var insurance = document.getElementById("insuranceOrg").value;
       var institution = document.getElementById("institutionName").value;
       p.map(function (element, index) {
         if (element.chave == institution) {
           _this2.key = index;
         }
       });
-      var insurance = document.getElementById("insuranceOrg").value;
       i.map(function (element, index) {
         if (element.chave == insurance) {
           _this2.index = index;
@@ -2241,9 +2244,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           parcels: document.getElementById("parcelsNumber").value
         }
       }).then(function (response) {
-        _this2.$store.commit("setSimulation", response.data);
+        var result = response.data;
+
+        _this2.$store.commit("setSimulation", Object.values(result));
 
         _this2.$store.commit("setAux", true);
+
+        console.log(Object.values(_this2.$store.state.result));
       })["catch"](function (error) {
         console.log(error);
       });
@@ -39297,13 +39304,12 @@ var render = function() {
                             id: "taxValue",
                             type: "text",
                             name: "tax",
-                            value: "",
                             "aria-required": "true",
                             "aria-invalid": "false",
                             required: "true"
-                          }
-                        }),
-                        _vm._v(_vm._s(result.taxa) + "\n                ")
+                          },
+                          domProps: { value: result[index].taxa }
+                        })
                       ])
                     ]
                   ),
@@ -39329,13 +39335,12 @@ var render = function() {
                               id: "installmentsValue ",
                               type: "text",
                               name: "installments",
-                              value: "",
                               "aria-required": "true",
                               "aria-invalid": "false",
                               required: "true"
-                            }
-                          }),
-                          _vm._v(_vm._s(result.parcela) + "\n                ")
+                            },
+                            domProps: { value: result[index].parcelas }
+                          })
                         ])
                       ])
                     ]
@@ -39358,19 +39363,15 @@ var render = function() {
                           _c("input", {
                             staticClass: "form-control",
                             attrs: {
-                              id: "loanValue",
+                              id: "installmentValue",
                               type: "text",
-                              name: "loanValue",
-                              value: "",
+                              name: "installment",
                               "aria-required": "true",
                               "aria-invalid": "false",
                               required: "true"
-                            }
-                          }),
-                          _vm._v(
-                            _vm._s(result.valor_parcela) +
-                              "\n                  "
-                          )
+                            },
+                            domProps: { value: result[index].valor_parcela }
+                          })
                         ])
                       ])
                     ]
@@ -39391,16 +39392,15 @@ var render = function() {
                           _c("input", {
                             staticClass: "form-control",
                             attrs: {
-                              id: "loanValue",
+                              id: "insuranceValue",
                               type: "text",
-                              name: "loanValue",
-                              value: "",
+                              name: "insurance",
                               "aria-required": "true",
                               "aria-invalid": "false",
                               required: "true"
-                            }
-                          }),
-                          _vm._v(_vm._s(result.convenio) + "\n                ")
+                            },
+                            domProps: { value: result[index].convenio }
+                          })
                         ])
                       ])
                     ]
@@ -53246,7 +53246,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     institution: [],
     insurance: [],
     parcels: '',
-    result: [],
+    result: '',
     aux: false
   },
   mutations: {
@@ -53280,8 +53280,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\pfern\Desktop\Projetos com React e Vuejs\teste\teste-empresta\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\pfern\Desktop\Projetos com React e Vuejs\teste\teste-empresta\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\pduarte\Desktop\teste-empresta\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\pduarte\Desktop\teste-empresta\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

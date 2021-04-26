@@ -10,7 +10,7 @@ export default new Vuex.Store({
         institution: [],
         insurance: [],
         parcels: '',
-        result: [],
+        result: '',
         aux: false,
     },
 

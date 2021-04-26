@@ -177,6 +177,8 @@
   transition: 0.3s ease all;
 }
 </style>
+
+
 <script>
 import { VMoney } from "v-money";
 import { mapMutations, mapState } from "vuex";
@@ -234,14 +236,16 @@ export default {
       let clean = value.replace(/[^0-9,]*/g, "").replace(",", ".");
       let p = this.$store.state.institution;
       let i = this.$store.state.insurance;
+      let r= this.$store.state.result
+      let insurance = document.getElementById("insuranceOrg").value;
       let institution = document.getElementById("institutionName").value;
+    
       p.map((element, index) => {
         if (element.chave == institution) {
           this.key = index;
         }
       });
 
-      let insurance = document.getElementById("insuranceOrg").value;
       i.map((element, index) => {
         if (element.chave == insurance) {
           this.index = index;
@@ -261,8 +265,10 @@ export default {
         },
       })
         .then((response) => {
-          this.$store.commit("setSimulation", response.data); 
+          let result = response.data
+          this.$store.commit("setSimulation", Object.values(result)); 
           this.$store.commit("setAux", true); 
+          console.log(Object.values(this.$store.state.result))
         })
         .catch((error) => {
           console.log(error);

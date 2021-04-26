@@ -13,11 +13,11 @@
                       id="taxValue"
                       type="text"
                       name="tax"
-                      value=""
+                      :value="result[index].taxa"
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
-                    >{{result.taxa}}
+                    >
                   </span>
                 </div>
                 <div
@@ -31,11 +31,11 @@
                       id="installmentsValue "
                       type="text"
                       name="installments"
-                      value=""
+                      :value="result[index].parcelas"
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
-                    >{{result.parcela}}
+                    >
                   </span>
                   </span>
                 </div>
@@ -45,14 +45,14 @@
                     <span>
                         <input
                         class="form-control"
-                        id="loanValue"
+                        id="installmentValue"
                         type="text"
-                        name="loanValue"
-                        value=""
+                        name="installment"
+                        :value="result[index].valor_parcela"
                         aria-required="true"
                         aria-invalid="false"
                         required="true"
-                        >{{result.valor_parcela}}
+                        >
                     </span>  
                   </span>
                 </div>
@@ -62,14 +62,14 @@
                   <span>
                     <input
                       class="form-control"
-                      id="loanValue"
+                      id="insuranceValue"
                       type="text"
-                      name="loanValue"
-                      value=""
+                      name="insurance"
+                      :value="result[index].convenio"
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
-                    >{{result.convenio}}
+                    >
                   </span>
                     </span>
                 </div>
