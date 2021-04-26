@@ -1,3 +1,4 @@
+
 import Vue from 'vue';
 import Vuex from 'vuex'
 
@@ -9,7 +10,8 @@ export default new Vuex.Store({
         institution: [],
         insurance: [],
         parcels: '',
-
+        result: [],
+        aux: false,
     },
 
     mutations: {
@@ -25,6 +27,13 @@ export default new Vuex.Store({
         },
         setParcels: (state, payload) => {
             state.parcels = payload;
+        },
+
+        setSimulation: (state, payload) => {
+            state.result = payload;
+        },
+        setAux: (state, payload) => {
+            state.aux = payload
         },
     }
 })

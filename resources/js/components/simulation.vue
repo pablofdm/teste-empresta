@@ -2,9 +2,8 @@
   <section>
     <div class="h-100 bg-empresta">
       <div class="container mx-auto pt-5">
-        <div class="row">
-          <div class="col-12 col-md-6 formulario mx-auto">
-            <form v-on:submit.prevent method="POST">
+        <div class="row" v-show="$store.state.aux">
+          <div class="col-12 col-md-6 formulario mx-auto" v-for="(result, index) in $store.state.result" :key="index">
               <div class="form-row">
                 <div class="col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6">
                   <label class="label" for="nome">Taxa</label>
@@ -18,7 +17,7 @@
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
-                    />
+                    >{{result.taxa}}
                   </span>
                 </div>
                 <div
@@ -36,7 +35,7 @@
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
-                    />
+                    >{{result.parcela}}
                   </span>
                   </span>
                 </div>
@@ -53,7 +52,7 @@
                         aria-required="true"
                         aria-invalid="false"
                         required="true"
-                        />
+                        >{{result.valor_parcela}}
                     </span>  
                   </span>
                 </div>
@@ -70,12 +69,11 @@
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
-                    />
+                    >{{result.convenio}}
                   </span>
                     </span>
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>

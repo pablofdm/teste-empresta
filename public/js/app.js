@@ -2208,8 +2208,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       index: ""
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["loanValue", "institution", "insurance", "parcels"])),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setLoanValue", "setInstitutionName", "setInsuranceOrg", "setParcels"])), {}, {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["loanValue", "institution", "insurance", "parcels", "result", "aux"])),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setLoanValue", "setInstitutionName", "setInsuranceOrg", "setParcels", "setSimulation", "setAux"])), {}, {
     sendProposal: function sendProposal() {
       var _this2 = this;
 
@@ -2240,7 +2240,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           convenios: this.$store.state.insurance[this.index],
           parcels: document.getElementById("parcelsNumber").value
         }
-      }).then(function (response) {})["catch"](function (error) {
+      }).then(function (response) {
+        _this2.$store.commit("setSimulation", response.data);
+
+        _this2.$store.commit("setAux", true);
+      })["catch"](function (error) {
         console.log(error);
       });
     }
@@ -2258,8 +2262,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -39256,130 +39258,164 @@ var render = function() {
   return _c("section", [
     _c("div", { staticClass: "h-100 bg-empresta" }, [
       _c("div", { staticClass: "container mx-auto pt-5" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12 col-md-6 formulario mx-auto" }, [
-            _c(
-              "form",
+        _c(
+          "div",
+          {
+            directives: [
               {
-                attrs: { method: "POST" },
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [_vm._m(0)]
+                name: "show",
+                rawName: "v-show",
+                value: _vm.$store.state.aux,
+                expression: "$store.state.aux"
+              }
+            ],
+            staticClass: "row"
+          },
+          _vm._l(_vm.$store.state.result, function(result, index) {
+            return _c(
+              "div",
+              { key: index, staticClass: "col-12 col-md-6 formulario mx-auto" },
+              [
+                _c("div", { staticClass: "form-row" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+                    },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "label", attrs: { for: "nome" } },
+                        [_vm._v("Taxa")]
+                      ),
+                      _vm._v(" "),
+                      _c("span", [
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "taxValue",
+                            type: "text",
+                            name: "tax",
+                            value: "",
+                            "aria-required": "true",
+                            "aria-invalid": "false",
+                            required: "true"
+                          }
+                        }),
+                        _vm._v(_vm._s(result.taxa) + "\n                ")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-12 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+                    },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "label", attrs: { for: "nome" } },
+                        [_vm._v("Parcelas")]
+                      ),
+                      _vm._v(" "),
+                      _c("span", [
+                        _c("span", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "installmentsValue ",
+                              type: "text",
+                              name: "installments",
+                              value: "",
+                              "aria-required": "true",
+                              "aria-invalid": "false",
+                              required: "true"
+                            }
+                          }),
+                          _vm._v(_vm._s(result.parcela) + "\n                ")
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+                    },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "label", attrs: { for: "insurance" } },
+                        [_vm._v("Valor parcelas")]
+                      ),
+                      _vm._v(" "),
+                      _c("span", [
+                        _c("span", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "loanValue",
+                              type: "text",
+                              name: "loanValue",
+                              value: "",
+                              "aria-required": "true",
+                              "aria-invalid": "false",
+                              required: "true"
+                            }
+                          }),
+                          _vm._v(
+                            _vm._s(result.valor_parcela) +
+                              "\n                  "
+                          )
+                        ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+                    },
+                    [
+                      _c("label", { staticClass: "label" }, [
+                        _vm._v("Convênio")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", [
+                        _c("span", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "loanValue",
+                              type: "text",
+                              name: "loanValue",
+                              value: "",
+                              "aria-required": "true",
+                              "aria-invalid": "false",
+                              required: "true"
+                            }
+                          }),
+                          _vm._v(_vm._s(result.convenio) + "\n                ")
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]
             )
-          ])
-        ])
+          }),
+          0
+        )
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-row" }, [
-      _c(
-        "div",
-        { staticClass: "col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6" },
-        [
-          _c("label", { staticClass: "label", attrs: { for: "nome" } }, [
-            _vm._v("Taxa")
-          ]),
-          _vm._v(" "),
-          _c("span", [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                id: "taxValue",
-                type: "text",
-                name: "tax",
-                value: "",
-                "aria-required": "true",
-                "aria-invalid": "false",
-                required: "true"
-              }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-12 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6" },
-        [
-          _c("label", { staticClass: "label", attrs: { for: "nome" } }, [
-            _vm._v("Parcelas")
-          ]),
-          _vm._v(" "),
-          _c("span", [
-            _c("span", [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "installmentsValue ",
-                  type: "text",
-                  name: "installments",
-                  value: "",
-                  "aria-required": "true",
-                  "aria-invalid": "false",
-                  required: "true"
-                }
-              })
-            ])
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 col-sm-6 col-lg-6 col-md-6 col-xl-6" }, [
-        _c("label", { staticClass: "label", attrs: { for: "insurance" } }, [
-          _vm._v("Valor parcelas")
-        ]),
-        _vm._v(" "),
-        _c("span", [
-          _c("span", [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                id: "loanValue",
-                type: "text",
-                name: "loanValue",
-                value: "",
-                "aria-required": "true",
-                "aria-invalid": "false",
-                required: "true"
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 col-sm-6 col-lg-6 col-md-6 col-xl-6" }, [
-        _c("label", { staticClass: "label" }, [_vm._v("Convênio")]),
-        _vm._v(" "),
-        _c("span", [
-          _c("span", [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                id: "loanValue",
-                type: "text",
-                name: "loanValue",
-                value: "",
-                "aria-required": "true",
-                "aria-invalid": "false",
-                required: "true"
-              }
-            })
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -53209,7 +53245,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     loanValue: '',
     institution: [],
     insurance: [],
-    parcels: ''
+    parcels: '',
+    result: [],
+    aux: false
   },
   mutations: {
     setLoanValue: function setLoanValue(state, payload) {
@@ -53223,6 +53261,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     setParcels: function setParcels(state, payload) {
       state.parcels = payload;
+    },
+    setSimulation: function setSimulation(state, payload) {
+      state.result = payload;
+    },
+    setAux: function setAux(state, payload) {
+      state.aux = payload;
     }
   }
 }));
@@ -53236,8 +53280,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\pduarte\Desktop\teste-empresta\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\pduarte\Desktop\teste-empresta\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\pfern\Desktop\Projetos com React e Vuejs\teste\teste-empresta\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\pfern\Desktop\Projetos com React e Vuejs\teste\teste-empresta\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

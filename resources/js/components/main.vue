@@ -215,7 +215,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["loanValue", "institution", "insurance", "parcels"]),
+    ...mapState(["loanValue", "institution", "insurance", "parcels", "result", "aux"]),
   },
 
   methods: {
@@ -225,6 +225,8 @@ export default {
       "setInstitutionName",
       "setInsuranceOrg",
       "setParcels",
+      "setSimulation",
+      "setAux"
     ]),
 
     sendProposal: function () {
@@ -259,7 +261,8 @@ export default {
         },
       })
         .then((response) => {
-
+          this.$store.commit("setSimulation", response.data); 
+          this.$store.commit("setAux", true); 
         })
         .catch((error) => {
           console.log(error);
