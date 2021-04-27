@@ -2,6 +2,9 @@
   <section>
     <div class="h-100 bg-empresta">
       <div class="container mx-auto pt-5">
+        <div class="title">
+          <h3 class="text-white p-3">Valores da simulação:</h3>
+        </div>
         <div class="row">
           <div class="col-12 col-md-6 formulario mx-auto">
             <form v-on:submit.prevent method="POST">
@@ -23,9 +26,7 @@
                     />
                   </span>
                 </div>
-                <div
-                  class="col-12 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
-                >
+                <div class="col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6">
                   <label class="label" for="nome">Instituição</label>
                   <span>
                     <select
@@ -34,7 +35,6 @@
                       name="institutionName"
                       aria-required="true"
                       aria-invalid="false"
-                      required="true"
                     >
                       <option value="" disabled selected></option>
                       <option
@@ -58,7 +58,6 @@
                       class="form-control"
                       aria-required="true"
                       aria-invalid="false"
-                      required="true"
                     >
                       <option value="" disabled selected hidden></option>
                       <option
@@ -73,7 +72,7 @@
                   </span>
                 </div>
                 <div class="col-6 col-sm-6 col-lg-6 col-md-6 col-xl-6">
-                  <label class="label">Parcelas</label>
+                  <label class="label">Qtde. de Parcelas</label>
                   <span>
                     <select
                       name="insurance"
@@ -217,7 +216,14 @@ export default {
   },
 
   computed: {
-    ...mapState(["loanValue", "institution", "insurance", "parcels", "result", "aux"]),
+    ...mapState([
+      "loanValue",
+      "institution",
+      "insurance",
+      "parcels",
+      "result",
+      "aux",
+    ]),
   },
 
   methods: {
@@ -228,7 +234,7 @@ export default {
       "setInsuranceOrg",
       "setParcels",
       "setSimulation",
-      "setAux"
+      "setAux",
     ]),
 
     sendProposal: function () {
@@ -236,10 +242,10 @@ export default {
       let clean = value.replace(/[^0-9,]*/g, "").replace(",", ".");
       let p = this.$store.state.institution;
       let i = this.$store.state.insurance;
-      let r= this.$store.state.result
+      let r = this.$store.state.result;
       let insurance = document.getElementById("insuranceOrg").value;
       let institution = document.getElementById("institutionName").value;
-    
+
       p.map((element, index) => {
         if (element.chave == institution) {
           this.key = index;
@@ -265,10 +271,10 @@ export default {
         },
       })
         .then((response) => {
-          let result = response.data
-          this.$store.commit("setSimulation", Object.values(result)); 
-          this.$store.commit("setAux", true); 
-          console.log(Object.values(this.$store.state.result))
+          let result = response.data;
+          this.$store.commit("setSimulation", Object.values(result));
+          this.$store.commit("setAux", true);
+          console.log(Object.values(this.$store.state.result));
         })
         .catch((error) => {
           console.log(error);

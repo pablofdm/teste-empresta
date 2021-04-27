@@ -2173,7 +2173,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -2269,6 +2268,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2420,9 +2421,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log("Component mounted.");
+  },
+  directives: {
+    money: v_money__WEBPACK_IMPORTED_MODULE_0__["VMoney"]
+  },
+  data: function data() {
+    return {
+      price: 0.0,
+      money: {
+        decimal: ",",
+        thousands: ".",
+        prefix: "R$",
+        suffix: "",
+        precision: 2,
+        masked: false
+      }
+    };
   }
 });
 
@@ -6920,7 +6949,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bg-empresta[data-v-29e3ab12] {\r\n  background-color: #0A4D9B;\n}\n.formulario input[data-v-29e3ab12],\r\n.formulario textarea[data-v-29e3ab12] {\r\n  display: block;\r\n  width: 100%;\r\n  padding: 0.375rem 0.75rem;\r\n  font-size: 1rem;\r\n  margin-bottom: 0.95rem;\r\n  line-height: 1.5;\r\n  color: #495057;\r\n  background-color: #fff;\r\n  background-clip: padding-box;\r\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\r\n  background: #fff;\r\n  border: 2px solid #dfe4eb;\r\n  box-sizing: border-box;\r\n  border-radius: 4px;\n}\n.formulario label[data-v-29e3ab12] {\r\n  font-family: \"Noto Sans\", sans-serif;\r\n  font-size: 12px;\r\n  line-height: 14px;\r\n  letter-spacing: 0.2px;\r\n  color: #fff;\r\n  mix-blend-mode: normal;\r\n  opacity: 0.6;\n}\n.list-inline-item a[data-v-29e3ab12] {\r\n  margin-right: 6.5rem;\r\n  text-decoration: none;\n}\n.list-inline-item p[data-v-29e3ab12] {\r\n  margin-top: 1rem;\r\n  color: black;\n}\n#send-form[data-v-29e3ab12] {\r\n  background: #0a4d9b;\r\n  color: #fff;\r\n  border-radius: 6px;\r\n  border: 1px solid #0d4e9c;\r\n  text-transform: uppercase;\r\n  font-size: 12px;\r\n  font-size: 0.75rem;\r\n  font-weight: 500;\r\n  padding: 17px 50px;\r\n  letter-spacing: 0.95px;\r\n  line-height: 14px;\r\n  width: auto;\r\n  cursor: pointer;\n}\n#send-form[data-v-29e3ab12]:hover {\r\n  background-color: #fff;\r\n  color: #0a4d9b;\r\n  border: 1px solid #0a4d9b;\r\n  transition: 0.3s ease all;\n}\r\n", ""]);
+exports.push([module.i, "\n.bg-empresta[data-v-29e3ab12] {\r\n  background-color: #0a4d9b;\n}\n.formulario input[data-v-29e3ab12],\r\n.formulario textarea[data-v-29e3ab12] {\r\n  display: block;\r\n  width: 100%;\r\n  padding: 0.375rem 0.75rem;\r\n  font-size: 1rem;\r\n  margin-bottom: 0.95rem;\r\n  line-height: 1.5;\r\n  color: #495057;\r\n  background-color: #fff;\r\n  background-clip: padding-box;\r\n  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\r\n  background: #fff;\r\n  border: 2px solid #dfe4eb;\r\n  box-sizing: border-box;\r\n  border-radius: 4px;\n}\n.formulario label[data-v-29e3ab12] {\r\n  font-family: \"Noto Sans\", sans-serif;\r\n  font-size: 12px;\r\n  line-height: 14px;\r\n  letter-spacing: 0.2px;\r\n  color: #fff;\r\n  mix-blend-mode: normal;\r\n  opacity: 0.6;\n}\n.list-inline-item a[data-v-29e3ab12] {\r\n  margin-right: 6.5rem;\r\n  text-decoration: none;\n}\n.list-inline-item p[data-v-29e3ab12] {\r\n  margin-top: 1rem;\r\n  color: black;\n}\n#send-form[data-v-29e3ab12] {\r\n  background: #0a4d9b;\r\n  color: #fff;\r\n  border-radius: 6px;\r\n  border: 1px solid #0d4e9c;\r\n  text-transform: uppercase;\r\n  font-size: 12px;\r\n  font-size: 0.75rem;\r\n  font-weight: 500;\r\n  padding: 17px 50px;\r\n  letter-spacing: 0.95px;\r\n  line-height: 14px;\r\n  width: auto;\r\n  cursor: pointer;\n}\n#send-form[data-v-29e3ab12]:hover {\r\n  background-color: #fff;\r\n  color: #0a4d9b;\r\n  border: 1px solid #0a4d9b;\r\n  transition: 0.3s ease all;\n}\ninput[type=\"text\"][data-v-29e3ab12] {\r\n  font-weight: bold;\r\n  font-size: 1.5rem;\r\n  color: #ef6c00;\n}\r\n", ""]);
 
 // exports
 
@@ -38974,6 +39003,8 @@ var render = function() {
   return _c("section", [
     _c("div", { staticClass: "h-100 bg-empresta" }, [
       _c("div", { staticClass: "container mx-auto pt-5" }, [
+        _vm._m(0),
+        _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-12 col-md-6 formulario mx-auto" }, [
             _c(
@@ -39043,7 +39074,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "col-12 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+                        "col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
                     },
                     [
                       _c(
@@ -39061,8 +39092,7 @@ var render = function() {
                               id: "institutionName",
                               name: "institutionName",
                               "aria-required": "true",
-                              "aria-invalid": "false",
-                              required: "true"
+                              "aria-invalid": "false"
                             }
                           },
                           [
@@ -39123,8 +39153,7 @@ var render = function() {
                               value: "",
                               id: "insuranceOrg",
                               "aria-required": "true",
-                              "aria-invalid": "false",
-                              required: "true"
+                              "aria-invalid": "false"
                             }
                           },
                           [
@@ -39168,7 +39197,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _vm._m(1)
                 ]),
                 _vm._v(" "),
                 _c(
@@ -39202,11 +39231,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "title" }, [
+      _c("h3", { staticClass: "text-white p-3" }, [
+        _vm._v("Valores da simulação:")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "div",
       { staticClass: "col-6 col-sm-6 col-lg-6 col-md-6 col-xl-6" },
       [
-        _c("label", { staticClass: "label" }, [_vm._v("Parcelas")]),
+        _c("label", { staticClass: "label" }, [_vm._v("Qtde. de Parcelas")]),
         _vm._v(" "),
         _c("span", [
           _c(
@@ -39263,9 +39302,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", [
-    _c("div", { staticClass: "h-100 bg-empresta" }, [
-      _c("div", { staticClass: "container mx-auto pt-5" }, [
-        _c(
+    _c(
+      "div",
+      { staticClass: "h-100 bg-empresta" },
+      _vm._l(Object.values(_vm.$store.state.result), function(result, index) {
+        return _c(
           "div",
           {
             directives: [
@@ -39276,13 +39317,14 @@ var render = function() {
                 expression: "$store.state.aux"
               }
             ],
-            staticClass: "row"
+            key: index + 1,
+            staticClass: "container mx-auto pt-5 pb-5"
           },
-          _vm._l(_vm.$store.state.result, function(result, index) {
-            return _c(
-              "div",
-              { key: index, staticClass: "col-12 col-md-6 formulario mx-auto" },
-              [
+          [
+            _vm._m(0, true),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-12 col-md-6 formulario mx-auto" }, [
                 _c("div", { staticClass: "form-row" }, [
                   _c(
                     "div",
@@ -39294,52 +39336,23 @@ var render = function() {
                       _c(
                         "label",
                         { staticClass: "label", attrs: { for: "nome" } },
-                        [_vm._v("Taxa")]
-                      ),
-                      _vm._v(" "),
-                      _c("span", [
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            id: "taxValue",
-                            type: "text",
-                            name: "tax",
-                            "aria-required": "true",
-                            "aria-invalid": "false",
-                            required: "true"
-                          },
-                          domProps: { value: result[index].taxa }
-                        })
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "col-12 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
-                    },
-                    [
-                      _c(
-                        "label",
-                        { staticClass: "label", attrs: { for: "nome" } },
                         [_vm._v("Parcelas")]
                       ),
                       _vm._v(" "),
                       _c("span", [
                         _c("span", [
                           _c("input", {
-                            staticClass: "form-control",
+                            staticClass: "form-control text-center",
                             attrs: {
                               id: "installmentsValue ",
                               type: "text",
                               name: "installments",
                               "aria-required": "true",
                               "aria-invalid": "false",
-                              required: "true"
+                              required: "true",
+                              disabled: ""
                             },
-                            domProps: { value: result[index].parcelas }
+                            domProps: { value: result[index].parcelas + "x" }
                           })
                         ])
                       ])
@@ -39355,24 +39368,66 @@ var render = function() {
                       _c(
                         "label",
                         { staticClass: "label", attrs: { for: "insurance" } },
-                        [_vm._v("Valor parcelas")]
+                        [_vm._v("Valor das parcelas")]
                       ),
                       _vm._v(" "),
                       _c("span", [
                         _c("span", [
                           _c("input", {
-                            staticClass: "form-control",
+                            directives: [
+                              {
+                                name: "money",
+                                rawName: "v-money",
+                                value: _vm.money,
+                                expression: "money"
+                              }
+                            ],
+                            staticClass: "form-control text-center",
                             attrs: {
                               id: "installmentValue",
                               type: "text",
                               name: "installment",
                               "aria-required": "true",
                               "aria-invalid": "false",
-                              required: "true"
+                              required: "true",
+                              disabled: ""
                             },
                             domProps: { value: result[index].valor_parcela }
                           })
                         ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6 col-xl-6"
+                    },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "label", attrs: { for: "nome" } },
+                        [_vm._v("Taxa de juros a.m")]
+                      ),
+                      _vm._v(" "),
+                      _c("span", [
+                        _c("input", {
+                          staticClass: "form-control text-center",
+                          attrs: {
+                            id: "taxValue",
+                            type: "text",
+                            name: "tax",
+                            "aria-required": "true",
+                            "aria-invalid": "false",
+                            required: "true",
+                            disabled: ""
+                          },
+                          domProps: {
+                            value: result[index].taxa + "% de juros  "
+                          }
+                        })
                       ])
                     ]
                   ),
@@ -39390,14 +39445,15 @@ var render = function() {
                       _c("span", [
                         _c("span", [
                           _c("input", {
-                            staticClass: "form-control",
+                            staticClass: "form-control text-center",
                             attrs: {
                               id: "insuranceValue",
                               type: "text",
                               name: "insurance",
                               "aria-required": "true",
                               "aria-invalid": "false",
-                              required: "true"
+                              required: "true",
+                              disabled: ""
                             },
                             domProps: { value: result[index].convenio }
                           })
@@ -39406,16 +39462,25 @@ var render = function() {
                     ]
                   )
                 ])
-              ]
-            )
-          }),
-          0
+              ])
+            ])
+          ]
         )
-      ])
-    ])
+      }),
+      0
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "title" }, [
+      _c("h3", { staticClass: "text-white p-3" }, [_vm._v("Simulação:")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -52894,7 +52959,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('header-component', __webpack_require__(/*! ./components/header.vue */ "./resources/js/components/header.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('main-component', __webpack_require__(/*! ./components/main.vue */ "./resources/js/components/main.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('simulation-component', __webpack_require__(/*! ./components/simulation.vue */ "./resources/js/components/simulation.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('simulation-component', __webpack_require__(/*! ./components/simulation.vue */ "./resources/js/components/simulation.vue")["default"]); // Vue.component('simulation-content', require('./components/simulationContent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -53280,8 +53346,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\pduarte\Desktop\teste-empresta\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\pduarte\Desktop\teste-empresta\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\pfern\Desktop\Projetos com React e Vuejs\teste\teste-empresta\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\pfern\Desktop\Projetos com React e Vuejs\teste\teste-empresta\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
