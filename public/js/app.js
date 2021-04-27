@@ -2173,6 +2173,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2206,11 +2208,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         precision: 2
       },
       key: "",
-      index: ""
+      index: "",
+      insuranceName: "",
+      institutionName: ""
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["loanValue", "institution", "insurance", "parcels", "result", "aux"])),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setLoanValue", "setInstitutionName", "setInsuranceOrg", "setParcels", "setSimulation", "setAux"])), {}, {
+    onChange: function onChange(e) {
+      this.institutionName = e.target.value; // should show your selected value
+    },
+    onChange2: function onChange2(e) {
+      this.insuranceName = e.target.value; // should show your selected value
+    },
     sendProposal: function sendProposal() {
       var _this2 = this;
 
@@ -2218,7 +2228,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var clean = value.replace(/[^0-9,]*/g, "").replace(",", ".");
       var p = this.$store.state.institution;
       var i = this.$store.state.insurance;
-      var r = this.$store.state.result;
+      var ow = this.institutionName;
       var insurance = document.getElementById("insuranceOrg").value;
       var institution = document.getElementById("institutionName").value;
       p.map(function (element, index) {
@@ -2270,6 +2280,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
 /* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2433,6 +2463,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log("Component mounted.");
@@ -2452,7 +2483,8 @@ __webpack_require__.r(__webpack_exports__);
         masked: false
       }
     };
-  }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["getArray"]))
 });
 
 /***/ }),
@@ -39093,6 +39125,11 @@ var render = function() {
                               name: "institutionName",
                               "aria-required": "true",
                               "aria-invalid": "false"
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.onChange($event)
+                              }
                             }
                           },
                           [
@@ -39154,6 +39191,11 @@ var render = function() {
                               id: "insuranceOrg",
                               "aria-required": "true",
                               "aria-invalid": "false"
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.onChange2($event)
+                              }
                             }
                           },
                           [
@@ -39305,7 +39347,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "h-100 bg-empresta" },
-      _vm._l(Object.values(_vm.$store.state.result), function(result, index) {
+      _vm._l(_vm.$store.getters.getArray[0], function(result, index) {
         return _c(
           "div",
           {
@@ -39317,11 +39359,24 @@ var render = function() {
                 expression: "$store.state.aux"
               }
             ],
-            key: index + 1,
-            staticClass: "container mx-auto pt-5 pb-5"
+            key: index,
+            staticClass: "container mx-auto pt-3 pb-3"
           },
           [
-            _vm._m(0, true),
+            _c("div", { staticClass: "title" }, [
+              _c("hr", {
+                staticStyle: {
+                  height: "0.5px",
+                  "border-width": "0",
+                  color: "#fff",
+                  "background-color": "#fff"
+                }
+              }),
+              _vm._v(" "),
+              _c("h3", { staticClass: "text-white p-3" }, [
+                _vm._v(_vm._s(index + 1 + "°") + " - Simulação:")
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-12 col-md-6 formulario mx-auto" }, [
@@ -39352,7 +39407,7 @@ var render = function() {
                               required: "true",
                               disabled: ""
                             },
-                            domProps: { value: result[index].parcelas + "x" }
+                            domProps: { value: result.parcelas + "x" }
                           })
                         ])
                       ])
@@ -39392,7 +39447,7 @@ var render = function() {
                               required: "true",
                               disabled: ""
                             },
-                            domProps: { value: result[index].valor_parcela }
+                            domProps: { value: result.valor_parcela }
                           })
                         ])
                       ])
@@ -39424,9 +39479,7 @@ var render = function() {
                             required: "true",
                             disabled: ""
                           },
-                          domProps: {
-                            value: result[index].taxa + "% de juros  "
-                          }
+                          domProps: { value: result.taxa + "% de juros  " }
                         })
                       ])
                     ]
@@ -39455,7 +39508,7 @@ var render = function() {
                               required: "true",
                               disabled: ""
                             },
-                            domProps: { value: result[index].convenio }
+                            domProps: { value: result.convenio }
                           })
                         ])
                       ])
@@ -39471,16 +39524,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "title" }, [
-      _c("h3", { staticClass: "text-white p-3" }, [_vm._v("Simulação:")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -52959,8 +53003,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('header-component', __webpack_require__(/*! ./components/header.vue */ "./resources/js/components/header.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('main-component', __webpack_require__(/*! ./components/main.vue */ "./resources/js/components/main.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('simulation-component', __webpack_require__(/*! ./components/simulation.vue */ "./resources/js/components/simulation.vue")["default"]); // Vue.component('simulation-content', require('./components/simulationContent.vue').default);
-
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('simulation-component', __webpack_require__(/*! ./components/simulation.vue */ "./resources/js/components/simulation.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -53308,12 +53351,17 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    loanValue: '',
+    loanValue: "",
     institution: [],
     insurance: [],
-    parcels: '',
-    result: '',
+    parcels: "",
+    result: "",
     aux: false
+  },
+  getters: {
+    getArray: function getArray(state) {
+      return state.result;
+    }
   },
   mutations: {
     setLoanValue: function setLoanValue(state, payload) {

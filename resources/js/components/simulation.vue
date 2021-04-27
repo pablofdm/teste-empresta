@@ -1,9 +1,22 @@
 <template>
   <section>
     <div class="h-100 bg-empresta">
-      <div class="container mx-auto pt-5 pb-5" v-for="(result, index) in Object.values($store.state.result)" :key="index+1" v-show="$store.state.aux">
+      <div
+        class="container mx-auto pt-3 pb-3"
+        v-for="(result, index) in $store.getters.getArray[0]"
+        :key="index"
+        v-show="$store.state.aux"
+      >
         <div class="title">
-          <h3 class="text-white p-3">Simulação:</h3>
+          <hr
+            style="
+              height: 0.5px;
+              border-width: 0;
+              color: #fff;
+              background-color: #fff;
+            "
+          />
+          <h3 class="text-white p-3">{{ index + 1 + "°" }} - Simulação:</h3>
         </div>
         <div class="row">
           <div class="col-12 col-md-6 formulario mx-auto">
@@ -17,7 +30,7 @@
                       id="installmentsValue "
                       type="text"
                       name="installments"
-                      :value="result[index].parcelas + 'x'"
+                      :value="result.parcelas + 'x'"
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
@@ -36,7 +49,7 @@
                       type="text"
                       name="installment"
                       v-money="money"
-                      :value="result[index].valor_parcela"
+                      :value="result.valor_parcela"
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
@@ -53,7 +66,7 @@
                     id="taxValue"
                     type="text"
                     name="tax"
-                    :value="result[index].taxa + '% de juros  '"
+                    :value="result.taxa + '% de juros  '"
                     aria-required="true"
                     aria-invalid="false"
                     required="true"
@@ -70,7 +83,7 @@
                       id="insuranceValue"
                       type="text"
                       name="insurance"
-                      :value="result[index].convenio"
+                      :value="result.convenio"
                       aria-required="true"
                       aria-invalid="false"
                       required="true"
@@ -162,6 +175,7 @@ input[type="text"] {
 
 <script>
 import { VMoney } from "v-money";
+import { mapGetters } from "vuex";
 export default {
   mounted() {
     console.log("Component mounted.");
@@ -179,6 +193,10 @@ export default {
         masked: false,
       },
     };
+  },
+
+  computed: {
+    ...mapGetters(["getArray"]),
   },
 };
 </script>

@@ -35,6 +35,7 @@
                       name="institutionName"
                       aria-required="true"
                       aria-invalid="false"
+                      @change="onChange($event)"
                     >
                       <option value="" disabled selected></option>
                       <option
@@ -58,6 +59,7 @@
                       class="form-control"
                       aria-required="true"
                       aria-invalid="false"
+                      @change="onChange2($event)"
                     >
                       <option value="" disabled selected hidden></option>
                       <option
@@ -212,6 +214,8 @@ export default {
       },
       key: "",
       index: "",
+      insuranceName: "",
+      institutionName: "",
     };
   },
 
@@ -237,12 +241,19 @@ export default {
       "setAux",
     ]),
 
+    onChange(e) {
+      this.institutionName = e.target.value; // should show your selected value
+    },
+    onChange2(e) {
+      this.insuranceName = e.target.value; // should show your selected value
+    },
+
     sendProposal: function () {
       let value = document.getElementById("loanValue").value;
       let clean = value.replace(/[^0-9,]*/g, "").replace(",", ".");
       let p = this.$store.state.institution;
       let i = this.$store.state.insurance;
-      let r = this.$store.state.result;
+      let ow = this.institutionName;
       let insurance = document.getElementById("insuranceOrg").value;
       let institution = document.getElementById("institutionName").value;
 
