@@ -35,13 +35,12 @@
                       name="institutionName"
                       aria-required="true"
                       aria-invalid="false"
-                      @change="onChange($event)"
+                     
                     >
                       <option value="" disabled selected></option>
                       <option
                         for="institution"
-                        @change="this.$root.key = index"
-                        v-for="(institution, index) in $store.state.institution"
+                        v-for="(institution) in $store.state.institution"
                         v-bind:key="institution.chave"
                       >
                         {{ institution.chave }}
@@ -58,14 +57,11 @@
                       id="insuranceOrg"
                       class="form-control"
                       aria-required="true"
-                      aria-invalid="false"
-                      @change="onChange2($event)"
-                    >
-                      <option value="" disabled selected hidden></option>
+                      aria-invalid="false"                    >
+                      <option value="" disabled selected></option>
                       <option
                         for="insuranceOpt"
-                        @change="this.$root.index = index"
-                        v-for="(insurance, index) in $store.state.insurance"
+                        v-for="insurance in $store.state.insurance"
                         :key="insurance.chave"
                       >
                         {{ insurance.chave }}
@@ -240,13 +236,6 @@ export default {
       "setSimulation",
       "setAux",
     ]),
-
-    onChange(e) {
-      this.institutionName = e.target.value; // should show your selected value
-    },
-    onChange2(e) {
-      this.insuranceName = e.target.value; // should show your selected value
-    },
 
     sendProposal: function () {
       let value = document.getElementById("loanValue").value;

@@ -2171,10 +2171,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2215,12 +2211,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])(["loanValue", "institution", "insurance", "parcels", "result", "aux"])),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapMutations"])(["setLoanValue", "setInstitutionName", "setInsuranceOrg", "setParcels", "setSimulation", "setAux"])), {}, {
-    onChange: function onChange(e) {
-      this.institutionName = e.target.value; // should show your selected value
-    },
-    onChange2: function onChange2(e) {
-      this.insuranceName = e.target.value; // should show your selected value
-    },
     sendProposal: function sendProposal() {
       var _this2 = this;
 
@@ -39125,11 +39115,6 @@ var render = function() {
                               name: "institutionName",
                               "aria-required": "true",
                               "aria-invalid": "false"
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.onChange($event)
-                              }
                             }
                           },
                           [
@@ -39138,19 +39123,13 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _vm._l(_vm.$store.state.institution, function(
-                              institution,
-                              index
+                              institution
                             ) {
                               return _c(
                                 "option",
                                 {
                                   key: institution.chave,
-                                  attrs: { for: "institution" },
-                                  on: {
-                                    change: function($event) {
-                                      this.$root.key = index
-                                    }
-                                  }
+                                  attrs: { for: "institution" }
                                 },
                                 [
                                   _vm._v(
@@ -39191,37 +39170,21 @@ var render = function() {
                               id: "insuranceOrg",
                               "aria-required": "true",
                               "aria-invalid": "false"
-                            },
-                            on: {
-                              change: function($event) {
-                                return _vm.onChange2($event)
-                              }
                             }
                           },
                           [
                             _c("option", {
-                              attrs: {
-                                value: "",
-                                disabled: "",
-                                selected: "",
-                                hidden: ""
-                              }
+                              attrs: { value: "", disabled: "", selected: "" }
                             }),
                             _vm._v(" "),
                             _vm._l(_vm.$store.state.insurance, function(
-                              insurance,
-                              index
+                              insurance
                             ) {
                               return _c(
                                 "option",
                                 {
                                   key: insurance.chave,
-                                  attrs: { for: "insuranceOpt" },
-                                  on: {
-                                    change: function($event) {
-                                      this.$root.index = index
-                                    }
-                                  }
+                                  attrs: { for: "insuranceOpt" }
                                 },
                                 [
                                   _vm._v(
@@ -39479,7 +39442,7 @@ var render = function() {
                             required: "true",
                             disabled: ""
                           },
-                          domProps: { value: result.taxa + "% de juros  " }
+                          domProps: { value: result.taxa + "% de juros" }
                         })
                       ])
                     ]

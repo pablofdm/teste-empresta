@@ -66,7 +66,7 @@
                     id="taxValue"
                     type="text"
                     name="tax"
-                    :value="result.taxa + '% de juros  '"
+                    :value="result.taxa + '% de juros'"
                     aria-required="true"
                     aria-invalid="false"
                     required="true"
